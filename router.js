@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const userController = require("./controllers/usercontroller");
+const userController = require("./controllers/userController");
 
 router.get("/api");
 
 router.post("/api/register", userController.register);
-router.post("/api/login");
+router.post("/api/login", userController.login);
 router.get("/api/logout");
 
 module.exports = router;

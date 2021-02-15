@@ -1,5 +1,4 @@
 const express = require("express");
-const bcrpt = require("bcrypt");
 const dontenv = require("dotenv");
 dontenv.config();
 const jwt = require("jsonwebtoken");
@@ -26,10 +25,6 @@ app.use("/", router);
 //   const user = req.body;
 //   const email = req.body.email;
 //   const password = req.body.password;
-
-//   bcrpt.genSalt(10, (err, salt) => {
-//     bcrpt.hash(password, salt, (err, hash) => {});
-//   });
 
 //   // jwt.sign({ user: req.body }, "secretkey", (err, token) => {
 //   //   res.json({ token: token });
@@ -60,7 +55,7 @@ app.use("/", router);
 //     res.sendStatus(403);
 //   }
 // }
-const port = 2500;
+const port = 3900;
 app.listen(port, () => {
   console.log(`App is running on port ${port}`);
 });
