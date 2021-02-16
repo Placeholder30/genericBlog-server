@@ -9,14 +9,16 @@ class User {
 
   register = async () => {
     const client = await pool.connect();
-    let { email, password } = this.data;
+    console.log(this.data);
+    let { email, firstName, lastName, password } = this.data;
+    console.log(email, password, firstName, lastName);
 
     let salt = bcrypt.genSaltSync(10);
     let hash = bcrypt.hashSync(password, salt);
 
     const result = await client.query(
-      "INSERT INTO users (email , password) VALUES ($1, $2)",
-      [email, hash]
+      "INSERT INTO users (email , password, first_name, last_name, last_login) VALUES ($1, $2, $3, $4, NOW())",
+      [email, hash, firstName, lastName]
     );
     client.end();
   };
@@ -28,9 +30,16 @@ class User {
         "SELECT password FROM users WHERE email = $1 ",
         [email]
       );
+
       const truePassword = result.rows[0].password;
       try {
-        resolve(bcrypt.compare(password, truePassword));
+        const result = await bcrypt.compare(password, truePassword);
+        if (result) {
+          resolve(true);
+          client.query("UPDATE users SET last_login = NOW() WHERE email = $1", [
+            email,
+          ]);
+        }
       } catch (error) {
         console.log(error);
       }

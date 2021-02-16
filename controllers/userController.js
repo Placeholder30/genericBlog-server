@@ -2,6 +2,7 @@ const User = require("../models/User");
 
 exports.register = async (req, res) => {
   const data = req.body;
+  console.log(req.body);
   const user = new User(data);
   const result = await user.register();
 
@@ -19,6 +20,6 @@ exports.login = async (req, res) => {
         message: "You've succesfully Logged in",
       })
     : res.status(403).json({
-        message: "please enter a valid email and password",
+        message: "please enter a valid email and or password",
       });
 };
