@@ -1,4 +1,3 @@
-const validator = require("validator");
 const pool = require("../db");
 const bcrypt = require("bcrypt");
 
@@ -9,7 +8,6 @@ class User {
 
   register = async () => {
     const client = await pool.connect();
-    console.log(this.data);
     let { email, firstName, lastName, password } = this.data;
     console.log(email, password, firstName, lastName);
 
