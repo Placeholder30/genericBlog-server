@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
   const data = req.body;
@@ -19,7 +20,8 @@ exports.login = async (req, res) => {
   const result = await user.login();
   result
     ? res.status(200).json({
-        message: "You've succesfully Logged in",
+        message: "you've sucessfully logged in",
+        authToken: result,
       })
     : res.status(403).json({
         message: "please enter a valid email and or password",
