@@ -37,7 +37,9 @@ class User {
           client.query("UPDATE users SET last_login = NOW() WHERE email = $1", [
             email,
           ]);
-          const token = jwt.sign({ id: user_id }, process.env.TOKEN_SECRET);
+          const token = jwt.sign({ id: user_id }, process.env.TOKEN_SECRET, {
+            expiresIn: "2h",
+          });
           resolve(token);
         } else {
           reject(false);
