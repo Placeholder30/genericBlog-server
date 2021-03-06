@@ -1,6 +1,5 @@
 const express = require("express");
-const dontenv = require("dotenv");
-dontenv.config();
+const dontenv = require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const router = require("./router");
